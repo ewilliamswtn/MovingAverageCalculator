@@ -1,16 +1,18 @@
 
 let AvgFunction = () => {
 
-  var textBox1 = document.getElementById('arrayInput').value;
-  var win = parseInt(document.getElementById('windowInput').value);
-  var inputArray = [];  // Array built from user input
-	var holderArray = []; // Array to hold only the numbers being averaged
-	var outputArray = []; // Array to store output values 
+  const arrayInputString = document.getElementById('arrayInput').value;
+  const win = parseInt(document.getElementById('windowInput').value);
+  let inputArray = [];  // Array built from user input
+	const holderArray = []; // Array to hold only the numbers being averaged
+	const outputArray = []; // Array to store output values 
+	let sum = 0;
+
 
 	try {
 
-		inputArray = JSON.parse("[" + textBox1 + "]");
-		var inputArraySize = inputArray.length;
+		inputArray = JSON.parse("[" + arrayInputString + "]");
+		const inputArraySize = inputArray.length;
 
 		if (inputArraySize < win) {
 
@@ -18,29 +20,26 @@ let AvgFunction = () => {
 
 		} else {
 
-			for (var i = 0; i < inputArraySize; i++) {
+			for (let i = 0; i < inputArraySize; i++) {
 
 				holderArray.push(inputArray[i]);
 
 				if (outputArray.length < win) {
-
-					var sum = holderArray.reduce((a, b) => a + b, 0);
-					var avg = sum/(i+1);
+					sum += inputArray[i];
+					const avg = sum/(i+1);
 					outputArray.push(avg);
 
 				}
 
 				else {
 
-					holderArray.shift();
-					var sum = holderArray.reduce((a, b) => a + b, 0);
-					var avg = sum/win;
+					sum += inputArray[i] - holderArray.shift();
+					const avg = sum/win;
 					outputArray.push(avg);
 
 				}
 			}
 
-				console.log(win);
 				console.log(outputArray, "output");
 
 		}
@@ -64,5 +63,6 @@ document.getElementById("readyButton").onclick = AvgFunction;
 // Window size cannot be larger than array size
 
 
-
+// Time complexity: O(n)
+// Space complexicity: 0(n)
 
