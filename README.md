@@ -11,13 +11,13 @@
 
 ## Notes
 * An error message will be displayed if the user does not enter data for the **Array** and/or the **Window Size**.
-  * [scripts/scripts.js lines 19-24](/scripts.js)
+  * [scripts/scripts.js lines 19-24](/scripts/scripts.js)
 
 * An error message will be displayed if the user does not enter a valid array of numbers, separated by commas, for the **Array**.
-  * [scripts/scripts.js lines 27-34](/scripts.js)
+  * [scripts/scripts.js lines 27-34](/scripts/scripts.js)
 
 * An error message will be displayed if the user enters a **Window Size** that is larger than the size of the **Array**.
-  * [scripts/scripts.js lines 37-43](/scripts.js)
+  * [scripts/scripts.js lines 37-43](/scripts/scripts.js)
 
 * The user is unable to enter 0, negative numbers, or non-integers for the **Window Size**.
   * [index.html line 22](/index.html)
