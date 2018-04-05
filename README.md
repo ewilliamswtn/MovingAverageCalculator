@@ -23,7 +23,7 @@
   * [index.html line 22](/index.html)
 
 ### To run:
-From the root of this repository, click the green "Clone or download" button in the upper right-hand corner.<br>
-From the dropdown, select "Download ZIP".<br>
-Once the file is downloaded, unzip it.<br>
-Once the file is unzipped, open the folder and click the "index.html" file.<br>
+* From the root of this repository, click the green "Clone or download" button in the upper right-hand corner.<br>
+* From the dropdown, select "Download ZIP".<br>
+* Once the file is downloaded, unzip it.<br>
+* Once the file is unzipped, open the folder and click the "index.html" file.<br>
