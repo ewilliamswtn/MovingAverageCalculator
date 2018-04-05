@@ -1,68 +1,77 @@
-
-let AvgFunction = () => {
-
+// Gets user input from textboxes
+let getUserInput = () => {
+	document.getElementById("outputSpan").innerHTML = "";
   const arrayInputString = document.getElementById('arrayInput').value;
-  const win = parseInt(document.getElementById('windowInput').value);
-  let inputArray = [];  // Array built from user input
-	const holderArray = []; // Array to hold only the numbers being averaged
-	const outputArray = []; // Array to store output values 
-	let sum = 0;
+  const windowSize = parseInt(document.getElementById('windowInput').value);
+  errorCheck(arrayInputString, windowSize);
+}
 
+// Runs getUserInput() when the user presses the 'Done' button
+document.getElementById("readyButton").onclick = getUserInput;
 
+// Checks to see if data entered is valid
+let errorCheck = (arrayInputString, windowSize) => {
+
+	let inputArray = [];
+	let inputExists = false;
+	let arrayisValid = false;
+
+	if (arrayInputString && windowSize) {
+		inputExists = true;
+	}else {
+		console.log("Please enter data in the input boxes.");
+	}
+
+	// Throws an error if the array is not entered as numbers, separted by commas
 	try {
-
 		inputArray = JSON.parse("[" + arrayInputString + "]");
-		const inputArraySize = inputArray.length;
-
-		if (inputArraySize < win) {
-
-			console.log("Window size should not be larger than array size.");
-
-		} else {
-
-			for (let i = 0; i < inputArraySize; i++) {
-
-				holderArray.push(inputArray[i]);
-
-				if (outputArray.length < win) {
-					sum += inputArray[i];
-					const avg = sum/(i+1);
-					outputArray.push(avg);
-
-				}
-
-				else {
-
-					sum += inputArray[i] - holderArray.shift();
-					const avg = sum/win;
-					outputArray.push(avg);
-
-				}
-			}
-
-				console.log(outputArray, "output");
-
-		}
+		arrayisValid = true;
 	} catch (error) {
-
 		console.log("Array must be entered as numbers, separted by commas.");
+		arrayIsValid = false;
+	}
 
+	// Checks that the windows size is not larger than the array
+	if (inputArray.length >= windowSize && arrayisValid == true) {
+		averageFunction(inputArray, windowSize);
+	} else if (inputArray.length < windowSize && arrayisValid == true) {
+		console.log("Window size should not be larger than array size.");		
 	}
 }
 
-document.getElementById("readyButton").onclick = AvgFunction;
+// Function that builds the array of averages, and outputs this array when completed
+let averageFunction = (inputArray, windowSize) => {
+	const holderArray = []; // Tracks array elements being used to take the average
+	const outputArray = []; // Used to store calculated averages
+	let sum = 0;
 
-// ***********************************************************
-// notes
-// ***********************************************************
+	for (let i = 0; i < inputArray.length; i++) {
+		holderArray.push(inputArray[i]);
 
-// Array must be numbers, separated by commas
+		// Calculate cumulative averages up until the window size has been hit
+		if (outputArray.length < windowSize) {
+				sum += inputArray[i];
+				const avg = sum/(i+1);
+				outputArray.push(avg);
 
-// Window size must be an integer
-// Window size cannot be negative, or 0
-// Window size cannot be larger than array size
+		// After the window size has been hit, calculates simple moving average using windowSize  
+		} else {
+				sum += inputArray[i] - holderArray.shift();
+				const avg = sum/windowSize;
+				outputArray.push(avg);
+		}
+	}
+
+	// Output
+	document.getElementById("outputSpan").innerHTML ="[" + outputArray.join(", ") + "]";
+	console.log(outputArray, "output");
+
+}
 
 
-// Time complexity: O(n)
-// Space complexicity: 0(n)
+
+
+
+
+
 
