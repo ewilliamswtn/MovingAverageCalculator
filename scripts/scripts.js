@@ -19,6 +19,7 @@ let errorCheck = (arrayInputString, windowSize) => {
 	if (arrayInputString && windowSize) {
 		inputExists = true;
 	}else {
+		document.getElementById("outputSpan").innerHTML ="Please enter data in the input boxes.";
 		console.log("Please enter data in the input boxes.");
 	}
 
@@ -27,6 +28,7 @@ let errorCheck = (arrayInputString, windowSize) => {
 		inputArray = JSON.parse("[" + arrayInputString + "]");
 		arrayisValid = true;
 	} catch (error) {
+		document.getElementById("outputSpan").innerHTML ="Array must be entered as numbers, separted by commas.";
 		console.log("Array must be entered as numbers, separted by commas.");
 		arrayIsValid = false;
 	}
@@ -35,6 +37,7 @@ let errorCheck = (arrayInputString, windowSize) => {
 	if (inputArray.length >= windowSize && arrayisValid == true) {
 		averageFunction(inputArray, windowSize);
 	} else if (inputArray.length < windowSize && arrayisValid == true) {
+		document.getElementById("outputSpan").innerHTML ="Window size should not be larger than array size.";
 		console.log("Window size should not be larger than array size.");		
 	}
 }
